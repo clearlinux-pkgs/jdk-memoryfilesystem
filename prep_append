@@ -1,0 +1,13 @@
+python3 /usr/share/java-utils/pom_editor.py pom_remove_plugin  :maven-source-plugin
+python3 /usr/share/java-utils/pom_editor.py pom_remove_plugin  :maven-release-plugin
+python3 /usr/share/java-utils/pom_editor.py pom_remove_plugin  :maven-javadoc-plugin
+python3 /usr/share/java-utils/pom_editor.py pom_remove_plugin  com.github.marschall:jdeps-maven-plugin
+python3 /usr/share/java-utils/pom_editor.py pom_remove_plugin  org.jboss.jandex:jandex-maven-plugin
+python3 /usr/share/java-utils/pom_editor.py pom_remove_dep com.github.marschall:zipfilesystem-standalone
+python3 /usr/share/java-utils/pom_editor.py pom_remove_dep org.openjdk.jol:jol-core
+
+# maven-jandex-plugin is currently not packaged
+sed -i '/jandex.idx/d' pom.xml
+# remove test which need jol-core and zipfilesystem-standalone
+rm -rf ./src/test/java/com/github/marschall/memoryfilesystem/MemoryFileTest.java
+rm -rf ./src/test/java/com/github/marschall/memoryfilesystem/ZipFileSystemInteropabilityTest.java
